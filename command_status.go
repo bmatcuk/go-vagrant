@@ -1,4 +1,4 @@
-package main
+package go_vagrant
 
 // StatusCommand specifies options and output from vagrant status
 type StatusCommand struct {

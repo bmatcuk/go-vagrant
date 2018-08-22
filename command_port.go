@@ -1,4 +1,4 @@
-package main
+package go_vagrant
 
 // PortCommand specifies the options and output of vagrant port.
 type PortCommand struct {

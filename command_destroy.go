@@ -1,4 +1,4 @@
-package main
+package go_vagrant
 
 // A DestroyCommand specifies the options and output of vagrant destroy.
 type DestroyCommand struct {
