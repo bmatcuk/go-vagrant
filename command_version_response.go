@@ -1,19 +1,17 @@
 package vagrant
 
 import (
-	"errors"
 	"strings"
 )
 
 type VersionResponse struct {
+	ErrorResponse
+
 	// The current version
 	InstalledVersion string
 
 	// The latest version
 	LatestVersion string
-
-	// If set, there was an error while running vagrant version
-	Error error
 }
 
 func newVersionResponse() VersionResponse {
@@ -29,7 +27,7 @@ func (resp *VersionResponse) handleOutput(target, key string, message []string) 
 		resp.InstalledVersion = strings.Join(message, ",")
 	} else if key == "version-latest" {
 		resp.LatestVersion = strings.Join(message, ",")
-	} else if key == "error-exit" {
-		resp.Error = errors.New(strings.Join(message, ", "))
+	} else {
+		resp.ErrorResponse.handleOutput(target, key, message)
 	}
 }

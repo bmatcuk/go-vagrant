@@ -13,20 +13,6 @@ func TestUpCommand_buildArguments(t *testing.T) {
 		assertArguments(t, args)
 	})
 
-	t.Run("provisioning", func(t *testing.T) {
-		cmd := client.Up()
-		cmd.Provisioning = false
-		args := cmd.buildArguments()
-		assertArguments(t, args, "--no-provision")
-	})
-
-	t.Run("provisioners", func(t *testing.T) {
-		cmd := client.Up()
-		cmd.Provisioners = []string{"a", "b", "c"}
-		args := cmd.buildArguments()
-		assertArguments(t, args, "--provision-with", "a,b,c")
-	})
-
 	t.Run("destroy-on-error", func(t *testing.T) {
 		cmd := client.Up()
 		cmd.DestroyOnError = false
@@ -36,9 +22,9 @@ func TestUpCommand_buildArguments(t *testing.T) {
 
 	t.Run("parallel", func(t *testing.T) {
 		cmd := client.Up()
-		cmd.Parallel = true
+		cmd.Parallel = false
 		args := cmd.buildArguments()
-		assertArguments(t, args, "--parallel")
+		assertArguments(t, args, "--no-parallel")
 	})
 
 	t.Run("provider", func(t *testing.T) {

@@ -1,29 +1,29 @@
 package vagrant
 
-// ReloadCommand specifies the options and output of vagrant reload
-type ReloadCommand struct {
+// A ResumeCommand specifies the options and output of vagrant resume.
+type ResumeCommand struct {
 	BaseCommand
 	ErrorResponse
 	ProvisioningArgument
 }
 
-// Run vagrant reload. After setting options as appropriate, you must call
+// Run vagrant resume. After setting options as appropriate, you must call
 // Run() or Start() followed by Wait() to execute. Errors will be recorded in
 // Error.
-func (client *VagrantClient) Reload() *ReloadCommand {
-	return &ReloadCommand{
+func (client *VagrantClient) Resume() *ResumeCommand {
+	return &ResumeCommand{
 		BaseCommand:   newBaseCommand(client),
 		ErrorResponse: newErrorResponse(),
 	}
 }
 
-func (cmd *ReloadCommand) init() error {
+func (cmd *ResumeCommand) init() error {
 	args := cmd.buildArguments()
-	return cmd.BaseCommand.init(&cmd.ErrorResponse, "reload", args...)
+	return cmd.BaseCommand.init(&cmd.ErrorResponse, "resume", args...)
 }
 
 // Run the command
-func (cmd *ReloadCommand) Run() error {
+func (cmd *ResumeCommand) Run() error {
 	if err := cmd.init(); err != nil {
 		return err
 	}
@@ -31,7 +31,7 @@ func (cmd *ReloadCommand) Run() error {
 }
 
 // Start the command. You must call Wait() to complete execution.
-func (cmd *ReloadCommand) Start() error {
+func (cmd *ResumeCommand) Start() error {
 	if err := cmd.init(); err != nil {
 		return err
 	}

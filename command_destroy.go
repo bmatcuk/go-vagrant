@@ -3,7 +3,7 @@ package vagrant
 // A DestroyCommand specifies the options and output of vagrant destroy.
 type DestroyCommand struct {
 	BaseCommand
-	DestroyResponse
+	ErrorResponse
 
 	// Destroy without confirmation (defaults to true because, when false,
 	// vagrant will try to ask for confirmation, but can't because it's running
@@ -20,9 +20,9 @@ type DestroyCommand struct {
 // Error.
 func (client *VagrantClient) Destroy() *DestroyCommand {
 	return &DestroyCommand{
-		BaseCommand:     newBaseCommand(client),
-		DestroyResponse: newDestroyResponse(),
-		Force:           true,
+		BaseCommand:   newBaseCommand(client),
+		ErrorResponse: newErrorResponse(),
+		Force:         true,
 	}
 }
 
@@ -39,7 +39,7 @@ func (cmd *DestroyCommand) buildArguments() []string {
 
 func (cmd *DestroyCommand) init() error {
 	args := cmd.buildArguments()
-	return cmd.BaseCommand.init(&cmd.DestroyResponse, "destroy", args...)
+	return cmd.BaseCommand.init(&cmd.ErrorResponse, "destroy", args...)
 }
 
 // Run the command

@@ -3,7 +3,7 @@ package vagrant
 // SuspendCommand specifies options and output from vagrant suspend
 type SuspendCommand struct {
 	BaseCommand
-	SuspendResponse
+	ErrorResponse
 }
 
 // Run vagrant suspend. After setting options as appropriate, you must call
@@ -11,13 +11,13 @@ type SuspendCommand struct {
 // Error.
 func (client *VagrantClient) Suspend() *SuspendCommand {
 	return &SuspendCommand{
-		BaseCommand:     newBaseCommand(client),
-		SuspendResponse: newSuspendResponse(),
+		BaseCommand:   newBaseCommand(client),
+		ErrorResponse: newErrorResponse(),
 	}
 }
 
 func (cmd *SuspendCommand) init() error {
-	return cmd.BaseCommand.init(&cmd.SuspendResponse, "suspend")
+	return cmd.BaseCommand.init(&cmd.ErrorResponse, "suspend")
 }
 
 // Run the command

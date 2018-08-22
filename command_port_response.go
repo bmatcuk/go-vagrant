@@ -1,9 +1,7 @@
 package vagrant
 
 import (
-	"errors"
 	"strconv"
-	"strings"
 )
 
 type ForwardedPort struct {
@@ -15,12 +13,11 @@ type ForwardedPort struct {
 }
 
 type PortResponse struct {
+	ErrorResponse
+
 	// List of forwarded ports by VM. The keys of the may are Vagrant VM names
 	// (ex: default) and the values are arrays of ForwardedPort structs.
 	ForwardedPorts map[string][]ForwardedPort
-
-	// If set, there was an error while running vagrant port
-	Error error
 }
 
 func newPortResponse() PortResponse {
@@ -30,7 +27,6 @@ func newPortResponse() PortResponse {
 func (resp *PortResponse) handleOutput(target, key string, message []string) {
 	// Only interested in:
 	// * target: X, key: forwarded_port, message: [Y, Z]
-	// * key: error-exit, message: X
 	if target != "" && key == "forwarded_port" && len(message) == 2 {
 		var guest, host int
 		var err error
@@ -50,7 +46,7 @@ func (resp *PortResponse) handleOutput(target, key string, message []string) {
 			}
 			resp.ForwardedPorts[target] = ports
 		}
-	} else if key == "error-exit" {
-		resp.Error = errors.New(strings.Join(message, ", "))
+	} else {
+		resp.ErrorResponse.handleOutput(target, key, message)
 	}
 }

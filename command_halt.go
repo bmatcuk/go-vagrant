@@ -3,7 +3,7 @@ package vagrant
 // A HaltCommand specifies the options and output of vagrant halt.
 type HaltCommand struct {
 	BaseCommand
-	HaltResponse
+	ErrorResponse
 
 	// Force shutdown (equivalent to pulling the power from the machine, default:
 	// false)
@@ -15,8 +15,8 @@ type HaltCommand struct {
 // Error.
 func (client *VagrantClient) Halt() *HaltCommand {
 	return &HaltCommand{
-		BaseCommand:  newBaseCommand(client),
-		HaltResponse: newHaltResponse(),
+		BaseCommand:   newBaseCommand(client),
+		ErrorResponse: newErrorResponse(),
 	}
 }
 
@@ -30,7 +30,7 @@ func (cmd *HaltCommand) buildArguments() []string {
 
 func (cmd *HaltCommand) init() error {
 	args := cmd.buildArguments()
-	return cmd.BaseCommand.init(&cmd.HaltResponse, "halt", args...)
+	return cmd.BaseCommand.init(&cmd.ErrorResponse, "halt", args...)
 }
 
 // Run the command

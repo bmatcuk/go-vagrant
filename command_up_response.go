@@ -1,7 +1,6 @@
 package vagrant
 
 import (
-	"errors"
 	"strings"
 )
 
@@ -14,12 +13,11 @@ type VMInfo struct {
 }
 
 type UpResponse struct {
+	ErrorResponse
+
 	// Info about all of the VMs constructed by the Vagrantfile. The map keys are
 	// vagrant VM names (ex: default) and the values are VMInfo's.
 	VMInfo map[string]*VMInfo
-
-	// If set, there was an error while running vagrant up
-	Error error
 }
 
 func newUpResponse() UpResponse {
@@ -46,7 +44,7 @@ func (resp *UpResponse) handleOutput(target, key string, message []string) {
 			idx := strings.LastIndex(message[1], ":")
 			info.Name = strings.TrimSpace(message[1][idx+1:])
 		}
-	} else if key == "error-exit" {
-		resp.Error = errors.New(strings.Join(message, ", "))
+	} else {
+		resp.ErrorResponse.handleOutput(target, key, message)
 	}
 }

@@ -1,25 +1,15 @@
 package vagrant
 
-import (
-	"strings"
-)
-
 // UpCommand specifies options and output from vagrant up.
 type UpCommand struct {
 	BaseCommand
 	UpResponse
-
-	// Enable or disable provisioning (default: enabled)
-	Provisioning bool
-
-	// Enabled provisioners by type or name (default: blank which means they're
-	// all enable or disabled depending on the Provisioning flag)
-	Provisioners []string
+	ProvisioningArgument
 
 	// Destroy on error (default: true)
 	DestroyOnError bool
 
-	// Enable parallel execution if the provider supports it (default: false)
+	// Enable parallel execution if the provider supports it (default: true)
 	Parallel bool
 
 	// Provider to use (default: blank which means vagrant will use the default
@@ -36,25 +26,19 @@ func (client *VagrantClient) Up() *UpCommand {
 	return &UpCommand{
 		BaseCommand:     newBaseCommand(client),
 		UpResponse:      newUpResponse(),
-		Provisioning:    true,
 		DestroyOnError:  true,
+		Parallel:        true,
 		InstallProvider: true,
 	}
 }
 
 func (cmd *UpCommand) buildArguments() []string {
-	args := []string{}
-	if !cmd.Provisioning {
-		args = append(args, "--no-provision")
-	}
-	if cmd.Provisioners != nil && len(cmd.Provisioners) > 0 {
-		args = append(args, "--provision-with", strings.Join(cmd.Provisioners, ","))
-	}
+	args := cmd.ProvisioningArgument.buildArguments()
 	if !cmd.DestroyOnError {
 		args = append(args, "--no-destroy-on-error")
 	}
-	if cmd.Parallel {
-		args = append(args, "--parallel")
+	if !cmd.Parallel {
+		args = append(args, "--no-parallel")
 	}
 	if len(cmd.Provider) > 0 {
 		args = append(args, "--provider", cmd.Provider)

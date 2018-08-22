@@ -119,7 +119,7 @@ func (*VagrantClient) Provision() *ProvisionCommand
 ```
 
 Options:
-* **Provisioners** (default: nil) - Enable only certain provisioners, by type
+* **Provisioners** (default: `nil`) - Enable only certain provisioners, by type
   or name as an array of strings.
 
 Response:
@@ -134,9 +134,31 @@ func (*VagrantClient) Reload() *ReloadCommand
 ```
 
 Options:
-* **Provisioning** (default: `true`) - Enable or disable provisioning.
-* **Provisioners** (default: nil) - Enable only certain provisioners, by type
-  or name as an array of strings.
+* **Provisioning** (default: `DefaultProvisioning`) - By default will only run
+  provisioners if they haven't been run already. If set to ForceProvisioning
+  then provisioners will be forced to run; if set to DisableProvisioning then
+  provisioners will be disabled.
+* **Provisioners** (default: `nil`) - Enable only certain provisioners, by type
+  or name as an array of strings. Implies ForceProvisioning.
+
+Response:
+* **Error** - Set if an error occurred.
+
+
+### Resume
+Resume a suspended vagrant machine
+
+```go
+func (*VagrantClient) Resume() *ResumeCommand
+```
+
+Options:
+* **Provisioning** (default: `DefaultProvisioning`) - By default will only run
+  provisioners if they haven't been run already. If set to ForceProvisioning
+  then provisioners will be forced to run; if set to DisableProvisioning then
+  provisioners will be disabled.
+* **Provisioners** (default: `nil`) - Enable only certain provisioners, by type
+  or name as an array of strings. Implies ForceProvisioning.
 
 Response:
 * **Error** - Set if an error occurred.
@@ -150,7 +172,7 @@ func (*VagrantClient) SSHConfig() *SSHConfigCommand
 ```
 
 Options:
-* **Host** (default: "") - Name the host for the config
+* **Host** (default: `""`) - Name the host for the config
 
 Response:
 * **Configs** - a map of vagrant machine names to `SSHConfig` objects. Each
@@ -190,14 +212,17 @@ func (*VagrantClient) Up() *UpCommand
 ```
 
 Options:
-* **Provisioning** (default: `true`) - Enable or disable provisioning.
-* **Provisioners** (default: nil) - Enable only certain provisioners, by type
-  or name as an array of strings.
+* **Provisioning** (default: `DefaultProvisioning`) - By default will only run
+  provisioners if they haven't been run already. If set to ForceProvisioning
+  then provisioners will be forced to run; if set to DisableProvisioning then
+  provisioners will be disabled.
+* **Provisioners** (default: `nil`) - Enable only certain provisioners, by type
+  or name as an array of strings. Implies ForceProvisioning.
 * **DestroyOnError** (default: `true`) - Destroy machine if any fatal error
   happens.
-* **Parallel** (default: `false`) - Enable or disable parallelism if provider
+* **Parallel** (default: `true`) - Enable or disable parallelism if provider
   supports it.
-* **Provider** (default: "") - Back the machine with a specific provider.
+* **Provider** (default: `""`) - Back the machine with a specific provider.
 * **InstallProvider** (default: `true`) - If possible, install the provider if
   it isn't installed.
 

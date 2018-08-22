@@ -1,7 +1,6 @@
 package vagrant
 
 import (
-	"errors"
 	"strconv"
 	"strings"
 )
@@ -22,12 +21,11 @@ type SSHConfig struct {
 }
 
 type SSHConfigResponse struct {
+	ErrorResponse
+
 	// SSH Configs per VM. Map keys match vagrant VM names (ex: default) and
 	// the values are configs.
 	Configs map[string]SSHConfig
-
-	// If set, there was an error while running vagrant ssh-config
-	Error error
 }
 
 func newSSHConfigResponse() SSHConfigResponse {
@@ -72,7 +70,7 @@ func (resp *SSHConfigResponse) handleOutput(target, key string, message []string
 			}
 		}
 		resp.Configs[target] = config
-	} else if key == "error-exit" {
-		resp.Error = errors.New(strings.Join(message, ", "))
+	} else {
+		resp.ErrorResponse.handleOutput(target, key, message)
 	}
 }

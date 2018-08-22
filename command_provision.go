@@ -1,17 +1,10 @@
 package vagrant
 
-import (
-	"strings"
-)
-
 // ProvisionCommand specifies the options and output of vagrant provision
 type ProvisionCommand struct {
 	BaseCommand
-	ProvisionResponse
-
-	// Enabled provisioners by type or name (default: blank which means they're
-	// all enabled)
-	Provisioners []string
+	ErrorResponse
+	ProvisionersArgument
 }
 
 // Run vagrant provision. After setting options as appropriate, you must call
@@ -19,22 +12,14 @@ type ProvisionCommand struct {
 // Error.
 func (client *VagrantClient) Provision() *ProvisionCommand {
 	return &ProvisionCommand{
-		BaseCommand:       newBaseCommand(client),
-		ProvisionResponse: newProvisionResponse(),
+		BaseCommand:   newBaseCommand(client),
+		ErrorResponse: newErrorResponse(),
 	}
-}
-
-func (cmd *ProvisionCommand) buildArguments() []string {
-	args := []string{}
-	if cmd.Provisioners != nil && len(cmd.Provisioners) > 0 {
-		args = append(args, "--provision-with", strings.Join(cmd.Provisioners, ","))
-	}
-	return args
 }
 
 func (cmd *ProvisionCommand) init() error {
 	args := cmd.buildArguments()
-	return cmd.BaseCommand.init(&cmd.ProvisionResponse, "provision", args...)
+	return cmd.BaseCommand.init(&cmd.ErrorResponse, "provision", args...)
 }
 
 // Run the command
