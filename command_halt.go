@@ -1,5 +1,6 @@
 package main
 
+// A HaltCommand specifies the options and output of vagrant halt.
 type HaltCommand struct {
 	BaseCommand
 	HaltResponse

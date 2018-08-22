@@ -1,5 +1,6 @@
 package main
 
+// SuspendCommand specifies options and output from vagrant suspend
 type SuspendCommand struct {
 	BaseCommand
 	SuspendResponse

@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// ProvisionCommand specifies the options and output of vagrant provision
 type ProvisionCommand struct {
 	BaseCommand
 	ProvisionResponse

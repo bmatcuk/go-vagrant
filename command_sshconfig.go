@@ -1,5 +1,6 @@
 package main
 
+// SSHConfigCommand specifies options and output from vagrant ssh-config
 type SSHConfigCommand struct {
 	BaseCommand
 	SSHConfigResponse
@@ -10,8 +11,8 @@ type SSHConfigCommand struct {
 }
 
 // Run vagrant ssh-config. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Run() or Start() followed by Wait() to execute. Output will be in Configs
+// and any error will be in Error.
 func (client *VagrantClient) SSHConfig() *SSHConfigCommand {
 	return &SSHConfigCommand{
 		BaseCommand:       newBaseCommand(client),

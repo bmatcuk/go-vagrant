@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 )
 
+// Library users should construct a new VagrantClient using NewVagrantClient().
+// From the client, vagrant commands can be constructed such as: client.Up().
 type VagrantClient struct {
 	// Directory where the Vagrantfile can be found.
 	//

@@ -8,6 +8,8 @@ import (
 	"sync"
 )
 
+// Base functionality and fields for all commands constructed from the
+// VagrantClient.
 type BaseCommand struct {
 	OutputParser
 

@@ -1,12 +1,14 @@
 package main
 
+// PortCommand specifies the options and output of vagrant port.
 type PortCommand struct {
 	BaseCommand
 	PortResponse
 }
 
 // Run vagrant port. After setting options as appropriate, you must call Run()
-// or Start() followed by Wait() to execute. Errors will be recorded in Error.
+// or Start() followed by Wait() to execute. Output will be in ForwardedPorts
+// with any error in Error.
 func (client *VagrantClient) Port() *PortCommand {
 	return &PortCommand{
 		BaseCommand:  newBaseCommand(client),

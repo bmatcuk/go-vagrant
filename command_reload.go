@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// ReloadCommand specifies the options and output of vagrant reload
 type ReloadCommand struct {
 	BaseCommand
 	ReloadResponse

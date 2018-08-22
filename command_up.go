@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// UpCommand specifies options and output from vagrant up.
 type UpCommand struct {
 	BaseCommand
 	UpResponse

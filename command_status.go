@@ -1,13 +1,14 @@
 package main
 
+// StatusCommand specifies options and output from vagrant status
 type StatusCommand struct {
 	BaseCommand
 	StatusResponse
 }
 
 // Run vagrant status. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Run() or Start() followed by Wait() to execute. Output will be in Status
+// and any error will be in Error.
 func (client *VagrantClient) Status() *StatusCommand {
 	return &StatusCommand{
 		BaseCommand:    newBaseCommand(client),

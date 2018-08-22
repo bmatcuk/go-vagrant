@@ -1,13 +1,14 @@
 package main
 
+// VersionCommand specifies options and output from vagrant version
 type VersionCommand struct {
 	BaseCommand
 	VersionResponse
 }
 
 // Run vagrant version. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Run() or Start() followed by Wait() to execute. Output will be in
+// InstalledVersion and LatestVersion and any error will be in Error.
 func (client *VagrantClient) Version() *VersionCommand {
 	return &VersionCommand{
 		BaseCommand:     newBaseCommand(client),
