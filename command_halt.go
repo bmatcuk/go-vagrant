@@ -1,4 +1,4 @@
-package go_vagrant
+package vagrant
 
 // A HaltCommand specifies the options and output of vagrant halt.
 type HaltCommand struct {

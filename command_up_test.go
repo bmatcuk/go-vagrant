@@ -1,4 +1,4 @@
-package go_vagrant
+package vagrant
 
 import (
 	"testing"
@@ -50,8 +50,8 @@ func TestUpCommand_buildArguments(t *testing.T) {
 
 	t.Run("install-provider", func(t *testing.T) {
 		cmd := client.Up()
-		cmd.InstallProvider = true
+		cmd.InstallProvider = false
 		args := cmd.buildArguments()
-		assertArguments(t, args, "--install-provider")
+		assertArguments(t, args, "--no-install-provider")
 	})
 }

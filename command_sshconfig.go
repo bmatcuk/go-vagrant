@@ -1,4 +1,4 @@
-package go_vagrant
+package vagrant
 
 // SSHConfigCommand specifies options and output from vagrant ssh-config
 type SSHConfigCommand struct {

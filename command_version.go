@@ -1,4 +1,4 @@
-package go_vagrant
+package vagrant
 
 // VersionCommand specifies options and output from vagrant version
 type VersionCommand struct {

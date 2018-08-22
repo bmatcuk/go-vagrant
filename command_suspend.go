@@ -1,4 +1,4 @@
-package go_vagrant
+package vagrant
 
 // SuspendCommand specifies options and output from vagrant suspend
 type SuspendCommand struct {

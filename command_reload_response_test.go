@@ -1,4 +1,4 @@
-package go_vagrant
+package vagrant
 
 import (
 	"testing"

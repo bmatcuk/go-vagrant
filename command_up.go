@@ -1,4 +1,4 @@
-package go_vagrant
+package vagrant
 
 import (
 	"strings"
@@ -34,10 +34,11 @@ type UpCommand struct {
 // or Start() followed by Wait() to execute. Output will be in VMInfo or Error.
 func (client *VagrantClient) Up() *UpCommand {
 	return &UpCommand{
-		BaseCommand:    newBaseCommand(client),
-		UpResponse:     newUpResponse(),
-		Provisioning:   true,
-		DestroyOnError: true,
+		BaseCommand:     newBaseCommand(client),
+		UpResponse:      newUpResponse(),
+		Provisioning:    true,
+		DestroyOnError:  true,
+		InstallProvider: true,
 	}
 }
 
@@ -58,8 +59,8 @@ func (cmd *UpCommand) buildArguments() []string {
 	if len(cmd.Provider) > 0 {
 		args = append(args, "--provider", cmd.Provider)
 	}
-	if cmd.InstallProvider {
-		args = append(args, "--install-provider")
+	if !cmd.InstallProvider {
+		args = append(args, "--no-install-provider")
 	}
 	return args
 }
