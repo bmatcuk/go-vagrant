@@ -50,7 +50,8 @@ func (b *BaseCommand) init(handler outputHandler, subcommand string, args ...str
 	}
 
 	// setup the command
-	arguments := append([]string{subcommand, "--machine-readable"}, args...)
+	arguments := b.client.buildArguments(subcommand)
+	arguments = append(arguments, args...)
 	if b.AdditionalArgs != nil && len(b.AdditionalArgs) > 0 {
 		arguments = append(arguments, b.AdditionalArgs...)
 	}

@@ -35,10 +35,10 @@ func (cmd *SSHConfigCommand) init() error {
 
 // Run the command
 func (cmd *SSHConfigCommand) Run() error {
-	if err := cmd.init(); err != nil {
+	if err := cmd.Start(); err != nil {
 		return err
 	}
-	return cmd.BaseCommand.Run()
+	return cmd.Wait()
 }
 
 // Start the command. You must call Wait() to complete execution.

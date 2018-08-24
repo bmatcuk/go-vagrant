@@ -15,7 +15,8 @@ type VagrantClient struct {
 	// be changed afterward.
 	VagrantfileDir string
 
-	executable string
+	executable   string
+	preArguments []string
 }
 
 // Create a new VagrantClient.
@@ -39,4 +40,11 @@ func NewVagrantClient(vagrantfileDir string) (*VagrantClient, error) {
 		VagrantfileDir: vagrantfileDir,
 		executable:     path,
 	}, nil
+}
+
+func (client *VagrantClient) buildArguments(subcommand string) []string {
+	if client.preArguments == nil || len(client.preArguments) == 0 {
+		return []string{subcommand, "--machine-readable"}
+	}
+	return append(client.preArguments, subcommand, "--machine-readable")
 }
