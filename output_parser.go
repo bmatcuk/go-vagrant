@@ -3,7 +3,7 @@ package vagrant
 import (
 	"bufio"
 	"io"
-	"os"
+	"log"
 	"strings"
 )
 
@@ -38,18 +38,13 @@ func (parser OutputParser) parseLine(line string, handler outputHandler) {
 	}
 
 	if parser.Verbose && key == "ui" {
-		outf := os.Stdout
 		level := "info"
 		msg := message
 		if len(msg) > 1 {
 			level = msg[0]
 			msg = msg[1:]
 		}
-		if level == "error" {
-			outf = os.Stderr
-		}
-		outf.WriteString(strings.Join(msg, ", "))
-		outf.Write([]byte{byte('\n')})
+		log.Printf("[%v] %v", strings.ToUpper(level), strings.Join(msg, ","))
 	}
 
 	handler.handleOutput(target, key, message)

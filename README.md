@@ -24,16 +24,33 @@ The package name will be `vagrant`.
 
 
 ## Basic Usage
+```go
+func NewVagrantClient(vagrantfileDir string) (*VagrantClient, error)
+```
+
 First, you'll need to instantiate a VagrantClient object using
 `NewVagrantClient`. The function takes one argument: the path to the directory
 where the Vagrantfile lives. This instantiation will check that the vagrant
 command exists and that the Vagrantfile can be read.
 
+```go
+func (*VagrantClient) Action() *CommandObject
+CommandObject.Option1 = ...
+CommandObject.Option2 = ...
+
+func (*CommandObject) Run() error
+func (*CommandObject) Start() error
+func (*CommandObject) Wait() error
+CommandObject.Output
+CommandObject.Error
+```
+
 From there, every vagrant action follows the same pattern: call the appropriate
 method on the client object to retrieve a command object. The command object
 has fields for any optional arguments. Then either call the command's `Run()`
 method, or call `Start()` and then `Wait()` on it later. Any output from the
-command, including errors, will be fields on the command object.
+command, including errors, will be fields on the command object. The exact
+field names for options and output are listed below in the [Actions] section.
 
 For example:
 
@@ -245,4 +262,5 @@ Response:
 * **Error** - Set if an error occurred.
 
 
+[Actions]: #available-actions
 [godocs for SSHConfig]: https://godoc.org/github.com/bmatcuk/go-vagrant#SSHConfig

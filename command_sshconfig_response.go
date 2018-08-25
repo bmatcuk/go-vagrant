@@ -5,19 +5,49 @@ import (
 	"strings"
 )
 
+// The fields and values in this struct match the fields and values in an SSH
+// config file. For example, you could build a SSH config file like:
+//   Host ...
+//     HostName ...
+//     Port ...
+//     User ...
+//     IdentityFile ...
 type SSHConfig struct {
-	AdditionalFields       map[string]string
-	ForwardAgent           string
-	Host                   string
-	HostName               string
-	IdentitiesOnly         string
-	IdentityFile           string
-	LogLevel               string
+	// Any additional fields returned from the ssh-config command.
+	AdditionalFields map[string]string
+
+	// Whether or not to enable ForwardAgent - "yes" or "no"
+	ForwardAgent string
+
+	// The Host matches the vagrant machine name (ex: default)
+	Host string
+
+	// The HostName to connect to (ex: 127.0.0.1)
+	HostName string
+
+	// Whether or not to enable IdentitiesOnly - "yes" or "no"
+	IdentitiesOnly string
+
+	// Path to a private key file to use for the connection (ex: ~/.ssh/id_rsa)
+	IdentityFile string
+
+	// Level of logging to enable (ex: FATAL)
+	LogLevel string
+
+	// Whether or not to enable password authentication - "yes" or "no"
 	PasswordAuthentication string
-	Port                   int
-	StrictHostKeyChecking  string
-	User                   string
-	UserKnownHostsFile     string
+
+	// Port to connect to (ex: 22)
+	Port int
+
+	// Whether or not to enable StrictHostKeyChecking - "yes" or "no"
+	StrictHostKeyChecking string
+
+	// User to connect as (ex: root)
+	User string
+
+	// Path to a known hosts file (ex: /dev/null)
+	UserKnownHostsFile string
 }
 
 type SSHConfigResponse struct {

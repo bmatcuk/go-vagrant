@@ -6,7 +6,7 @@ import (
 
 const sshConfigOutput = `
 1534898948,default,metadata,provider,virtualbox
-1534898948,default,ssh-config,Host default\n  HostName 127.0.0.1\n  User core\n  Port 2222\n  UserKnownHostsFile /dev/null\n  StrictHostKeyChecking no\n  PasswordAuthentication no\n  IdentityFile /Users/user/.vagrant.d/insecure_private_key\n  IdentitiesOnly yes\n  LogLevel FATAL\n  ForwardAgent yes\n
+1534898948,default,ssh-config,Host default\n  HostName 127.0.0.1\n  User core\n  Port 2222\n  UserKnownHostsFile /dev/null\n  StrictHostKeyChecking no\n  PasswordAuthentication no\n  IdentityFile /Users/user/.vagrant.d/insecure_private_key\n  IdentitiesOnly yes\n  LogLevel FATAL\n  ForwardAgent yes\nUnknownField no\n
 Host default
   HostName 127.0.0.1
   User core
@@ -18,6 +18,7 @@ Host default
   IdentitiesOnly yes
   LogLevel FATAL
   ForwardAgent yes
+	UnknownField no
 `
 
 func TestSSHConfigResponse_handleOutput(t *testing.T) {
@@ -70,5 +71,15 @@ func TestSSHConfigResponse_handleOutput(t *testing.T) {
 	}
 	if config.ForwardAgent != "yes" {
 		t.Errorf("Expecting ForwardAgent to be 'yes'; got %v", config.ForwardAgent)
+	}
+	if len(config.AdditionalFields) == 0 {
+		t.Errorf("Expecting len(AdditionalFields) to be >0; got %v", len(config.AdditionalFields))
+	} else {
+		field, ok := config.AdditionalFields["UnknownField"]
+		if !ok {
+			t.Errorf("Expecting AdditionalFields to have an 'UnknownField'")
+		} else if field != "no" {
+			t.Errorf("Expecting 'UnknownField' to have a value of 'no'; got %v", field)
+		}
 	}
 }
