@@ -95,7 +95,7 @@ func (b *BaseCommand) Start() error {
 	return nil
 }
 
-// Wait is used to wait on a command that was started wih Start().
+// Wait is used to wait on a command that was started with Start().
 func (b *BaseCommand) Wait() error {
 	b.readers.Wait()
 	err := b.cmd.Wait()

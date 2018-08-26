@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// VersionResponse is the output from vagrant version
 type VersionResponse struct {
 	ErrorResponse
 
