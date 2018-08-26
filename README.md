@@ -122,10 +122,17 @@ Get information about guest port forwarded mappings.
 func (*VagrantClient) Port() *PortCommand
 ```
 
+Options:
+* **MachineName** (default: `""`) - Specify the vagrant machine you are
+  interested in. If your Vagrantfile only brings up one machine, you do not
+  need to specify this. However, if your Vagrantfile brings up multiple
+  machines, you *must* specify this! For some reason, this is the only vagrant
+  command that cannot handle multiple machines.
+
 Response:
-* **ForwardedPorts** - a map of vagrant machine names to `ForwardedPort`
-  objects. Each ForwardedPort has a `Guest` and a `Host` port, representing
-  a mapping from the host port to the guest.
+* **ForwardedPorts** - an array of `ForwardedPort` objects. Each ForwardedPort
+  has a `Guest` and a `Host` port, representing a mapping from the host port
+  to the guest.
 * **Error** - Set if an error occurred.
 
 

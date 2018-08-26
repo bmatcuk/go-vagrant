@@ -4,19 +4,10 @@ import (
 	"testing"
 )
 
-const statusOutput = `
-1534903917,default,metadata,provider,virtualbox
-1534903918,default,provider-name,virtualbox
-1534903918,default,state,running
-1534903918,default,state-human-short,running
-1534903918,default,state-human-long,The VM is running. To stop this VM%!(VAGRANT_COMMA) you can run 'vagrant halt' to\nshut it down forcefully%!(VAGRANT_COMMA) or you can run 'vagrant suspend' to simply\nsuspend the virtual machine. In either case%!(VAGRANT_COMMA) to restart it again%!(VAGRANT_COMMA)\nsimply run 'vagrant up'.
-1534903918,,ui,info,Current machine states:\n\ndefault                   running (virtualbox)\n\nThe VM is running. To stop this VM%!(VAGRANT_COMMA) you can run 'vagrant halt' to\nshut it down forcefully%!(VAGRANT_COMMA) or you can run 'vagrant suspend' to simply\nsuspend the virtual machine. In either case%!(VAGRANT_COMMA) to restart it again%!(VAGRANT_COMMA)\nsimply run 'vagrant up'.
-`
-
 func TestStatusResponse_handleOutput(t *testing.T) {
 	parser := MockOutputParser{}
 	data := newStatusResponse()
-	parser.Run(statusOutput, &data)
+	parser.Run(successfulOutput["status"], &data)
 
 	if data.Error != nil {
 		t.Errorf("Successful vagrant status should not have set an error: %v", data.Error)

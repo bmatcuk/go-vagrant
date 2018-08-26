@@ -4,27 +4,10 @@ import (
 	"testing"
 )
 
-const sshConfigOutput = `
-1534898948,default,metadata,provider,virtualbox
-1534898948,default,ssh-config,Host default\n  HostName 127.0.0.1\n  User core\n  Port 2222\n  UserKnownHostsFile /dev/null\n  StrictHostKeyChecking no\n  PasswordAuthentication no\n  IdentityFile /Users/user/.vagrant.d/insecure_private_key\n  IdentitiesOnly yes\n  LogLevel FATAL\n  ForwardAgent yes\nUnknownField no\n
-Host default
-  HostName 127.0.0.1
-  User core
-  Port 2222
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  PasswordAuthentication no
-  IdentityFile /Users/user/.vagrant.d/insecure_private_key
-  IdentitiesOnly yes
-  LogLevel FATAL
-  ForwardAgent yes
-	UnknownField no
-`
-
 func TestSSHConfigResponse_handleOutput(t *testing.T) {
 	parser := MockOutputParser{}
 	data := newSSHConfigResponse()
-	parser.Run(sshConfigOutput, &data)
+	parser.Run(successfulOutput["ssh-config"], &data)
 
 	if data.Error != nil {
 		t.Errorf("Successful vagrant ssh-config should not have set an error: %v", data.Error)

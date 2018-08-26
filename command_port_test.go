@@ -10,7 +10,9 @@ func init() {
 1534865103,,ui,info,The forwarded ports for the machine are listed below. Please note that\nthese values may differ from values configured in the Vagrantfile if the\nprovider supports automatic port collision detection and resolution.
 1534865103,,ui,info,
 1534865103,,ui,info,    22 (guest) => 2222 (host)
+1534865103,,ui,info,    80 (guest) => 8080 (host)
 1534865103,default,forwarded_port,22,2222
+1534865103,default,forwarded_port,80,8080
 `
 }
 
@@ -28,15 +30,13 @@ func TestPortCommand_Run(t *testing.T) {
 		t.Fatalf("Expected forwarded ports for 1 VM; got %v", len(cmd.ForwardedPorts))
 	}
 
-	forwardedPorts, ok := cmd.ForwardedPorts["default"]
-	if !ok {
-		t.Fatal("Expected forwarded ports for 'default', but there were none.")
+	if len(cmd.ForwardedPorts) != 2 {
+		t.Fatalf("Expected 1 forwarded port; got %v", len(cmd.ForwardedPorts))
 	}
-
-	if len(forwardedPorts) != 1 {
-		t.Fatalf("Expected 1 forwarded port; got %v", len(forwardedPorts))
+	if cmd.ForwardedPorts[0].Guest != 22 || cmd.ForwardedPorts[0].Host != 2222 {
+		t.Errorf("Expected guest port 22 -> host 2222; got %v", cmd.ForwardedPorts[0])
 	}
-	if forwardedPorts[0].Guest != 22 || forwardedPorts[0].Host != 2222 {
-		t.Errorf("Expected guest port 22 -> host 2222; got %v", forwardedPorts[0])
+	if cmd.ForwardedPorts[1].Guest != 80 || cmd.ForwardedPorts[1].Host != 8080 {
+		t.Errorf("Expected guest port 80 -> host 8080; got %v", cmd.ForwardedPorts[1])
 	}
 }

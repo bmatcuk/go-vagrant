@@ -17,13 +17,13 @@ type ForwardedPort struct {
 type PortResponse struct {
 	ErrorResponse
 
-	// List of forwarded ports by VM. The keys of the may are Vagrant VM names
-	// (ex: default) and the values are arrays of ForwardedPort structs.
-	ForwardedPorts map[string][]ForwardedPort
+	// ForwardedPorts is a list of ports forwarded from the host OS to the guest
+	// OS for the requested vagrant machine.
+	ForwardedPorts []ForwardedPort
 }
 
 func newPortResponse() PortResponse {
-	return PortResponse{ForwardedPorts: make(map[string][]ForwardedPort)}
+	return PortResponse{ForwardedPorts: []ForwardedPort{}}
 }
 
 func (resp *PortResponse) handleOutput(target, key string, message []string) {
@@ -39,15 +39,7 @@ func (resp *PortResponse) handleOutput(target, key string, message []string) {
 			return
 		}
 
-		ports, ok := resp.ForwardedPorts[target]
-		if ok {
-			resp.ForwardedPorts[target] = append(ports, ForwardedPort{Guest: guest, Host: host})
-		} else {
-			ports = []ForwardedPort{
-				{Guest: guest, Host: host},
-			}
-			resp.ForwardedPorts[target] = ports
-		}
+		resp.ForwardedPorts = append(resp.ForwardedPorts, ForwardedPort{Guest: guest, Host: host})
 	} else {
 		resp.ErrorResponse.handleOutput(target, key, message)
 	}
