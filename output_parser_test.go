@@ -52,7 +52,7 @@ func (handler TestOutputHandler) AssertAllSeen(t *testing.T) {
 func TestVagrantOutputParser_parseLine(t *testing.T) {
 	parser := OutputParser{}
 	handler := TestOutputHandler{[]*ExpectedOutput{
-		&ExpectedOutput{Target: "default", Key: "ui", Message: []string{"info", "This is a test, with commas.\nAnd newlines."}},
+		{Target: "default", Key: "ui", Message: []string{"info", "This is a test, with commas.\nAnd newlines."}},
 	}}
 	parser.parseLine("123,default,ui,info,This is a test%!(VAGRANT_COMMA) with commas.\\nAnd newlines.", &handler)
 	handler.AssertAllSeen(t)

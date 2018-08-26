@@ -7,9 +7,9 @@ type ProvisionCommand struct {
 	ProvisionersArgument
 }
 
-// Run vagrant provision. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Provision will run the provisioners in a Vagrantfile. After setting options
+// as appropriate, you must call Run() or Start() followed by Wait() to
+// execute. Errors will be recorded in Error.
 func (client *VagrantClient) Provision() *ProvisionCommand {
 	return &ProvisionCommand{
 		BaseCommand:   newBaseCommand(client),

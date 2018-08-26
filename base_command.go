@@ -8,8 +8,8 @@ import (
 	"sync"
 )
 
-// Base functionality and fields for all commands constructed from the
-// VagrantClient.
+// BaseCommand adds base functionality and fields for all commands constructed
+// from the VagrantClient.
 type BaseCommand struct {
 	OutputParser
 
@@ -95,7 +95,7 @@ func (b *BaseCommand) Start() error {
 	return nil
 }
 
-// If execution was started with Start(), you must Wait() for it to finish.
+// Wait is used to wait on a command that was started wih Start().
 func (b *BaseCommand) Wait() error {
 	b.readers.Wait()
 	err := b.cmd.Wait()

@@ -1,6 +1,7 @@
 ![Release](https://img.shields.io/github/release/bmatcuk/go-vagrant.svg?branch=master)
 [![Build Status](https://travis-ci.com/bmatcuk/go-vagrant.svg?branch=master)](https://travis-ci.com/bmatcuk/go-vagrant)
 [![codecov.io](https://img.shields.io/codecov/c/github/bmatcuk/go-vagrant.svg?branch=master)](https://codecov.io/github/bmatcuk/go-vagrant?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bmatcuk/go-vagrant)](https://goreportcard.com/report/github.com/bmatcuk/go-vagrant)
 [![GoDoc](https://godoc.org/github.com/bmatcuk/go-vagrant?status.svg)](https://godoc.org/github.com/bmatcuk/go-vagrant)
 
 # go-vagrant

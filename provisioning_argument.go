@@ -1,20 +1,23 @@
 package vagrant
 
+// ProvisioningOption is used to set whether provisioning should be forced,
+// disabled, or use the default.
 type ProvisioningOption uint8
 
 const (
-	// By default, provisioning will only run if it hasn't run already. "always"
-	// provisioners will always run, however.
+	// DefaultProvisioning will cause vagrant to run the provisioners only if
+	// they haven't already been run.
 	DefaultProvisioning ProvisioningOption = iota
 
-	// Force provisioning, even if it has already run.
+	// ForceProvisioning will force the provisioners to run.
 	ForceProvisioning
 
-	// Disable provisioning
+	// DisableProvisioning will disable provisioners.
 	DisableProvisioning
 )
 
-// Adds Provisioning and Provisioners arguments to a Command
+// ProvisioningArgument adds Provisioning and Provisioners arguments to a
+// Command.
 type ProvisioningArgument struct {
 	ProvisionersArgument
 

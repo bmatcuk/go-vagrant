@@ -7,9 +7,9 @@ type ReloadCommand struct {
 	ProvisioningArgument
 }
 
-// Run vagrant reload. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Reload will halt and restart vagrant machines, reloading config from the
+// Vagrantfile. After setting options as appropriate, you must call Run() or
+// Start() followed by Wait() to execute. Errors will be recorded in Error.
 func (client *VagrantClient) Reload() *ReloadCommand {
 	return &ReloadCommand{
 		BaseCommand:   newBaseCommand(client),

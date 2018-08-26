@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// VMInfo has information about the created vagrant machines.
 type VMInfo struct {
 	// Name of the VM set by vagrant (ex: mydir_default_1534347044260_6006)
 	Name string
@@ -12,6 +13,7 @@ type VMInfo struct {
 	Provider string
 }
 
+// UpResponse is the output from vagrant up
 type UpResponse struct {
 	ErrorResponse
 

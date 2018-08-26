@@ -10,7 +10,8 @@ type SSHConfigCommand struct {
 	Host string
 }
 
-// Run vagrant ssh-config. After setting options as appropriate, you must call
+// SSHConfig will return connection information for connecting to a vagrant
+// machine via ssh. After setting options as appropriate, you must call
 // Run() or Start() followed by Wait() to execute. Output will be in Configs
 // and any error will be in Error.
 func (client *VagrantClient) SSHConfig() *SSHConfigCommand {

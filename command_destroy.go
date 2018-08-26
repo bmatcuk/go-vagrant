@@ -15,9 +15,9 @@ type DestroyCommand struct {
 	Parallel bool
 }
 
-// Run vagrant destroy. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Destroy will destroy the vagrant machines. After setting options as
+// appropriate, you must call Run() or Start() followed by Wait() to execute.
+// Errors will be recorded in Error.
 func (client *VagrantClient) Destroy() *DestroyCommand {
 	return &DestroyCommand{
 		BaseCommand:   newBaseCommand(client),

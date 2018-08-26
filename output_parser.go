@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// OutputParser is used to parse the output from the vagrant command.
 type OutputParser struct {
 	// If true, vagrant output will be echoed to stdout. Default: false
 	Verbose bool

@@ -5,8 +5,10 @@ import (
 	"strings"
 )
 
-// The fields and values in this struct match the fields and values in an SSH
-// config file. For example, you could build a SSH config file like:
+// The SSHConfig struct has all of the settings you'll need to connect to the
+// vagrant machine via ssh. The fields and values match the fields and values
+// that an ssh config file is expecting. For example, you could build a ssh
+// config file like:
 //   Host ...
 //     HostName ...
 //     Port ...
@@ -50,6 +52,7 @@ type SSHConfig struct {
 	UserKnownHostsFile string
 }
 
+// SSHConfigResponse has the output from vagrant ssh-config
 type SSHConfigResponse struct {
 	ErrorResponse
 

@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// ErrorResponse adds the Error field to command output.
 type ErrorResponse struct {
 	// If set, there was an error while running the vagrant command.
 	Error error

@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// StatusResponse has the output from vagrant status
 type StatusResponse struct {
 	ErrorResponse
 

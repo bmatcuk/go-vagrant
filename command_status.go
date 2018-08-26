@@ -6,9 +6,9 @@ type StatusCommand struct {
 	StatusResponse
 }
 
-// Run vagrant status. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Output will be in Status
-// and any error will be in Error.
+// Status will return the status of vagrant machines. After setting options as
+// appropriate, you must call Run() or Start() followed by Wait() to execute.
+// Output will be in Status and any error will be in Error.
 func (client *VagrantClient) Status() *StatusCommand {
 	return &StatusCommand{
 		BaseCommand:    newBaseCommand(client),

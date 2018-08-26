@@ -4,6 +4,7 @@ import (
 	"strconv"
 )
 
+// ForwardedPort defines the host port that maps to a guest port.
 type ForwardedPort struct {
 	// Port on the guest OS
 	Guest int
@@ -12,6 +13,7 @@ type ForwardedPort struct {
 	Host int
 }
 
+// PortResponse is the output from the vagrant port command.
 type PortResponse struct {
 	ErrorResponse
 
@@ -42,7 +44,7 @@ func (resp *PortResponse) handleOutput(target, key string, message []string) {
 			resp.ForwardedPorts[target] = append(ports, ForwardedPort{Guest: guest, Host: host})
 		} else {
 			ports = []ForwardedPort{
-				ForwardedPort{Guest: guest, Host: host},
+				{Guest: guest, Host: host},
 			}
 			resp.ForwardedPorts[target] = ports
 		}

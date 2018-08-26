@@ -20,8 +20,9 @@ type UpCommand struct {
 	InstallProvider bool
 }
 
-// Run vagrant up. After setting options as appropriate, you must call Run()
-// or Start() followed by Wait() to execute. Output will be in VMInfo or Error.
+// Up creates, if necessary, and brings up the vagrant machines. After setting
+// options as appropriate, you must call Run() or Start() followed by Wait()
+// to execute. Output will be in VMInfo or Error.
 func (client *VagrantClient) Up() *UpCommand {
 	return &UpCommand{
 		BaseCommand:     newBaseCommand(client),

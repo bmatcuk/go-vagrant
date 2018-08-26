@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-// Adds a Provisioners argument to a command
+// ProvisionersArgument adds the Provisioners argument to a command.
 type ProvisionersArgument struct {
 	// Enabled provisioners by type or name (default: blank which means they're
 	// all enable or disabled depending on the Provisioning flag)

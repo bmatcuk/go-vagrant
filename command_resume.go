@@ -7,9 +7,9 @@ type ResumeCommand struct {
 	ProvisioningArgument
 }
 
-// Run vagrant resume. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Resume will restart a vagrant machine that has been suspended or halted.
+// After setting options as appropriate, you must call Run() or Start()
+// followed by Wait() to execute. Errors will be recorded in Error.
 func (client *VagrantClient) Resume() *ResumeCommand {
 	return &ResumeCommand{
 		BaseCommand:   newBaseCommand(client),

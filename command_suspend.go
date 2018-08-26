@@ -6,9 +6,9 @@ type SuspendCommand struct {
 	ErrorResponse
 }
 
-// Run vagrant suspend. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Suspend will cause the vagrant machine to "suspend", like putting a computer
+// to sleep. After setting options as appropriate, you must call Run() or
+// Start() followed by Wait() to execute. Errors will be recorded in Error.
 func (client *VagrantClient) Suspend() *SuspendCommand {
 	return &SuspendCommand{
 		BaseCommand:   newBaseCommand(client),

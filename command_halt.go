@@ -10,9 +10,9 @@ type HaltCommand struct {
 	Force bool
 }
 
-// Run vagrant halt. After setting options as appropriate, you must call
-// Run() or Start() followed by Wait() to execute. Errors will be recorded in
-// Error.
+// Halt will shutdown the vagrant machine. After setting options as appropriate,
+// you must call Run() or Start() followed by Wait() to execute. Errors will be
+// recorded in Error.
 func (client *VagrantClient) Halt() *HaltCommand {
 	return &HaltCommand{
 		BaseCommand:   newBaseCommand(client),
