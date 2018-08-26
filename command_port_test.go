@@ -26,12 +26,8 @@ func TestPortCommand_Run(t *testing.T) {
 		t.Fatalf("Command return error: %v", cmd.Error)
 	}
 
-	if len(cmd.ForwardedPorts) != 1 {
-		t.Fatalf("Expected forwarded ports for 1 VM; got %v", len(cmd.ForwardedPorts))
-	}
-
 	if len(cmd.ForwardedPorts) != 2 {
-		t.Fatalf("Expected 1 forwarded port; got %v", len(cmd.ForwardedPorts))
+		t.Fatalf("Expected 2 forwarded port; got %v", len(cmd.ForwardedPorts))
 	}
 	if cmd.ForwardedPorts[0].Guest != 22 || cmd.ForwardedPorts[0].Host != 2222 {
 		t.Errorf("Expected guest port 22 -> host 2222; got %v", cmd.ForwardedPorts[0])
