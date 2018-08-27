@@ -55,10 +55,10 @@ func TestBaseCommand_init(t *testing.T) {
 			}
 		}
 
-		if cmd.cmd.Env == nil {
+		if cmd.cmd.Env == nil || len(cmd.cmd.Env) == 0 {
 			t.Errorf("Expected cmd.Env to be set")
-		} else if cmd.cmd.Env[0] != "ENV1=value1" {
-			t.Errorf("Expected env[0] to be 'ENV1=value1'; got %v", cmd.cmd.Env[0])
+		} else if cmd.cmd.Env[len(cmd.cmd.Env)-1] != "ENV1=value1" {
+			t.Errorf("Expected env[-1] to be 'ENV1=value1'; got %v", cmd.cmd.Env[len(cmd.cmd.Env)-1])
 		}
 
 		if cmd.cmd.Dir != client.VagrantfileDir {

@@ -62,7 +62,9 @@ func (b *BaseCommand) init(handler outputHandler, subcommand string, args ...str
 		b.cmd = exec.CommandContext(b.Context, b.client.executable, arguments...)
 	}
 	b.cmd.Dir = b.client.VagrantfileDir
-	b.cmd.Env = b.Env
+	if b.Env != nil {
+		b.cmd.Env = append(os.Environ(), b.Env...)
+	}
 
 	// setup the output parser
 	stdout, err := b.cmd.StdoutPipe()
