@@ -100,6 +100,23 @@ Response:
 * **Error** - Set if an error occurred.
 
 
+### GlobalStatus
+Get the status of all vagrant machines.
+
+```go
+func (*VagrantClient) GlobalStatus() *GlobalStatusCommand
+```
+
+Options:
+* **Prune** (default: `false`) - Remove invalid entries
+
+Response:
+* **Error** - Set if an error occurred.
+* **Status** - A map of vagrant machine IDs (ex: 1a2b3c4d) to GlobalStatus
+  objects which describe the name, state, and directory in which the machine
+  was created.
+
+
 ### Halt
 Stops the vagrant machine.
 
