@@ -3,6 +3,7 @@ package vagrant
 // A DestroyCommand specifies the options and output of vagrant destroy.
 type DestroyCommand struct {
 	BaseCommand
+	MachineNameArgument
 	ErrorResponse
 
 	// Destroy without confirmation (defaults to true because, when false,
@@ -34,7 +35,7 @@ func (cmd *DestroyCommand) buildArguments() []string {
 	if cmd.Parallel {
 		args = append(args, "--parallel")
 	}
-	return args
+	return cmd.appendMachineName(args)
 }
 
 func (cmd *DestroyCommand) init() error {

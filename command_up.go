@@ -3,6 +3,7 @@ package vagrant
 // UpCommand specifies options and output from vagrant up.
 type UpCommand struct {
 	BaseCommand
+	MachineNameArgument
 	UpResponse
 	ProvisioningArgument
 
@@ -47,7 +48,7 @@ func (cmd *UpCommand) buildArguments() []string {
 	if !cmd.InstallProvider {
 		args = append(args, "--no-install-provider")
 	}
-	return args
+	return cmd.appendMachineName(args)
 }
 
 func (cmd *UpCommand) init() error {

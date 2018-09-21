@@ -95,6 +95,8 @@ Options:
   complain that there's no attached TTY.
 * **Parallel** (default: `false`) - Enable or disable parallelism if provider
   supports it (automatically enables Force).
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to destroy.
+  If unspecified (default), all VMs in the current directory will be destroyed.
 
 Response:
 * **Error** - Set if an error occurred.
@@ -127,6 +129,8 @@ func (*VagrantClient) Halt() *HaltCommand
 Options:
 * **Force** (default: `false`) - Force shutdown (equivalent to pulling the
   power of the VM)
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to halt.
+  If unspecified (default), all VMs in the current directory will be halted.
 
 Response:
 * **Error** - Set if an error occurred.
@@ -163,6 +167,9 @@ func (*VagrantClient) Provision() *ProvisionCommand
 Options:
 * **Provisioners** (default: `nil`) - Enable only certain provisioners, by type
   or name as an array of strings.
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to provision.
+  If unspecified (default), all VMs in the current directory will be
+  provisioned.
 
 Response:
 * **Error** - Set if an error occurred.
@@ -182,6 +189,8 @@ Options:
   provisioners will be disabled.
 * **Provisioners** (default: `nil`) - Enable only certain provisioners, by type
   or name as an array of strings. Implies ForceProvisioning.
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to reload.
+  If unspecified (default), all VMs in the current directory will be reloaded.
 
 Response:
 * **Error** - Set if an error occurred.
@@ -201,6 +210,8 @@ Options:
   provisioners will be disabled.
 * **Provisioners** (default: `nil`) - Enable only certain provisioners, by type
   or name as an array of strings. Implies ForceProvisioning.
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to resume.
+  If unspecified (default), all VMs in the current directory will be resumed.
 
 Response:
 * **Error** - Set if an error occurred.
@@ -215,6 +226,9 @@ func (*VagrantClient) SSHConfig() *SSHConfigCommand
 
 Options:
 * **Host** (default: `""`) - Name the host for the config
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to retrieve
+  the configuration for. If unspecified (default), the configuration of all VMs
+  in the current directory will be returned.
 
 Response:
 * **Configs** - a map of vagrant machine names to `SSHConfig` objects. Each
@@ -229,6 +243,11 @@ Get the status of the vagrant machine.
 func (*VagrantClient) Status() *StatusCommand
 ```
 
+Options:
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to retrieve
+  the status for. If unspecified (default), the status of all VMs in the
+  current directory will be returned.
+
 Response:
 * **Status** - a map of vagrant machine names to a string describing the
   status of the VM.
@@ -241,6 +260,10 @@ Suspends the vagrant machine.
 ```go
 func (*VagrantClient) Suspend() *SuspendCommand
 ```
+
+Options:
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to suspend.
+  If unspecified (default), all VMs in the current directory will be suspended.
 
 Response:
 * **Error** - Set if an error occurred.
@@ -267,6 +290,9 @@ Options:
 * **Provider** (default: `""`) - Back the machine with a specific provider.
 * **InstallProvider** (default: `true`) - If possible, install the provider if
   it isn't installed.
+* **MachineName** (default: `""`) - The name or ID of a vagrant VM to bring up.
+  If unspecified (default), all VMs in the current directory will be brought
+  up.
 
 Response:
 * **VMInfo** - a map of vagrant machine names to `VMInfo` objects. Each VMInfo

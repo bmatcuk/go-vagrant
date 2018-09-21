@@ -3,6 +3,7 @@ package vagrant
 // StatusCommand specifies options and output from vagrant status
 type StatusCommand struct {
 	BaseCommand
+	MachineNameArgument
 	StatusResponse
 }
 
@@ -17,6 +18,9 @@ func (client *VagrantClient) Status() *StatusCommand {
 }
 
 func (cmd *StatusCommand) init() error {
+	if cmd.MachineName != "" {
+		return cmd.BaseCommand.init(&cmd.StatusResponse, "status", cmd.MachineName)
+	}
 	return cmd.BaseCommand.init(&cmd.StatusResponse, "status")
 }
 

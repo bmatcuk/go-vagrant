@@ -3,6 +3,7 @@ package vagrant
 // A ResumeCommand specifies the options and output of vagrant resume.
 type ResumeCommand struct {
 	BaseCommand
+	MachineNameArgument
 	ErrorResponse
 	ProvisioningArgument
 }
@@ -18,7 +19,7 @@ func (client *VagrantClient) Resume() *ResumeCommand {
 }
 
 func (cmd *ResumeCommand) init() error {
-	args := cmd.buildArguments()
+	args := cmd.appendMachineName(cmd.buildArguments())
 	return cmd.BaseCommand.init(&cmd.ErrorResponse, "resume", args...)
 }
 

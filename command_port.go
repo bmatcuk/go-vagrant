@@ -1,16 +1,12 @@
 package vagrant
 
-// PortCommand specifies the options and output of vagrant port.
+// PortCommand specifies the options and output of vagrant port. Note that
+// the port command is unique in that the MachineName option is required if
+// your Vagrantfile defines more than one VM!
 type PortCommand struct {
 	BaseCommand
+	MachineNameArgument
 	PortResponse
-
-	// MachineName is the vagrant machine you are interested in. If your
-	// Vagrantfile only brings up a single machine, you do not need to specify
-	// this. However, if your Vagrantfile brings up multiple machines, you MUST
-	// specify this! For some reason, this is the only vagrant command that
-	// cannot handle multiple machines.
-	MachineName string
 }
 
 // Port will return information about ports forwarded from the host to the

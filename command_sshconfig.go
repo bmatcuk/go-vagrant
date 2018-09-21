@@ -3,6 +3,7 @@ package vagrant
 // SSHConfigCommand specifies options and output from vagrant ssh-config
 type SSHConfigCommand struct {
 	BaseCommand
+	MachineNameArgument
 	SSHConfigResponse
 
 	// Name of a specific host to get SSH config info for. If not set, info for
@@ -26,7 +27,7 @@ func (cmd *SSHConfigCommand) buildArguments() []string {
 	if cmd.Host != "" {
 		args = append(args, "--host", cmd.Host)
 	}
-	return args
+	return cmd.appendMachineName(args)
 }
 
 func (cmd *SSHConfigCommand) init() error {

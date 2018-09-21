@@ -3,6 +3,7 @@ package vagrant
 // SuspendCommand specifies options and output from vagrant suspend
 type SuspendCommand struct {
 	BaseCommand
+	MachineNameArgument
 	ErrorResponse
 }
 
@@ -17,6 +18,9 @@ func (client *VagrantClient) Suspend() *SuspendCommand {
 }
 
 func (cmd *SuspendCommand) init() error {
+	if cmd.MachineName != "" {
+		return cmd.BaseCommand.init(&cmd.ErrorResponse, "suspend", cmd.MachineName)
+	}
 	return cmd.BaseCommand.init(&cmd.ErrorResponse, "suspend")
 }
 

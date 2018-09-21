@@ -3,6 +3,7 @@ package vagrant
 // A HaltCommand specifies the options and output of vagrant halt.
 type HaltCommand struct {
 	BaseCommand
+	MachineNameArgument
 	ErrorResponse
 
 	// Force shutdown (equivalent to pulling the power from the machine, default:
@@ -25,7 +26,7 @@ func (cmd *HaltCommand) buildArguments() []string {
 	if cmd.Force {
 		args = append(args, "--force")
 	}
-	return args
+	return cmd.appendMachineName(args)
 }
 
 func (cmd *HaltCommand) init() error {

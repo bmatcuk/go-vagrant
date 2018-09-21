@@ -3,6 +3,7 @@ package vagrant
 // ReloadCommand specifies the options and output of vagrant reload
 type ReloadCommand struct {
 	BaseCommand
+	MachineNameArgument
 	ErrorResponse
 	ProvisioningArgument
 }
@@ -18,7 +19,7 @@ func (client *VagrantClient) Reload() *ReloadCommand {
 }
 
 func (cmd *ReloadCommand) init() error {
-	args := cmd.buildArguments()
+	args := cmd.appendMachineName(cmd.buildArguments())
 	return cmd.BaseCommand.init(&cmd.ErrorResponse, "reload", args...)
 }
 

@@ -3,6 +3,7 @@ package vagrant
 // ProvisionCommand specifies the options and output of vagrant provision
 type ProvisionCommand struct {
 	BaseCommand
+	MachineNameArgument
 	ErrorResponse
 	ProvisionersArgument
 }
@@ -18,7 +19,7 @@ func (client *VagrantClient) Provision() *ProvisionCommand {
 }
 
 func (cmd *ProvisionCommand) init() error {
-	args := cmd.buildArguments()
+	args := cmd.appendMachineName(cmd.buildArguments())
 	return cmd.BaseCommand.init(&cmd.ErrorResponse, "provision", args...)
 }
 
