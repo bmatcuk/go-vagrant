@@ -97,7 +97,7 @@ func (resp *GlobalStatusResponse) handleOutput(target, key string, message []str
 			if resp.currentStatus == nil {
 				resp.currentStatus = &GlobalStatus{AdditionalInfo: make(map[string]string)}
 			}
-			resp.currentStatus.AdditionalInfo[resp.keys[resp.currentKey]] = message[1]
+			resp.currentStatus.AdditionalInfo[resp.keys[resp.currentKey]] = strings.TrimSpace(message[1])
 			resp.currentKey++
 		} else {
 			if message[1] == "" {
@@ -105,7 +105,7 @@ func (resp *GlobalStatusResponse) handleOutput(target, key string, message []str
 				resp.hasKeys = true
 				return
 			}
-			resp.keys = append(resp.keys, message[1])
+			resp.keys = append(resp.keys, strings.TrimSpace(message[1]))
 		}
 	} else {
 		resp.ErrorResponse.handleOutput(target, key, message)

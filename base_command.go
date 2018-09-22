@@ -92,7 +92,7 @@ func (b *BaseCommand) Run() error {
 // Start the command. You must call Wait() to complete execution.
 func (b *BaseCommand) Start() error {
 	if b.Verbose {
-		log.Printf("Running %v %v", b.cmd.Path, b.cmd.Args)
+		log.Printf("Running %v", b.cmd.Args)
 	}
 
 	if err := b.cmd.Start(); err != nil {
