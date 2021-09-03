@@ -3,7 +3,7 @@ package vagrant
 import "testing"
 
 func init() {
-	successfulOutput["box list"] = `
+	successfulOutput["box"] = `
 1630581222,,ui,info,andreiborisov/macos-bigsur-intel (parallels%!(VAGRANT_COMMA) 1.3.0)
 1630581222,,box-name,andreiborisov/macos-bigsur-intel
 1630581222,,box-provider,parallels
