@@ -82,6 +82,19 @@ func main() {
 
 ## Available Actions
 
+### BoxList
+Return a list of available vagrant boxes.
+
+```go
+func (*VagrantClient) BoxList() *BoxListCommand
+```
+
+Response:
+* **Boxes** - an array of `Box` objects. Each Box has a `Name`, `Provider`, and
+  `Version`.
+* **Error** - Set if an error occurred.
+
+
 ### Destroy
 Stop and delete all traces of the vagrant machines.
 
