@@ -5,20 +5,25 @@ import (
 	"strings"
 )
 
+// Box defines a box from the box list command
 type Box struct {
 	// The box name
 	Name string
+
 	// The box provider
 	Provider string
+
 	// The box version
 	Version string
 }
 
-// VersionResponse is the output from vagrant version
+// BoxListResponse is the output from the vagrant box list command
 type BoxListResponse struct {
 	ErrorResponse
 	boxesIndex int
-	Boxes      []*Box
+
+	// Boxes is a list of vagrant boxes.
+	Boxes []*Box
 }
 
 func newBoxListResponse() BoxListResponse {
@@ -33,7 +38,9 @@ func (resp *BoxListResponse) handleOutput(target, key string, message []string) 
 	// * key: box-name, message: X
 	// * key: box-provider, message: X
 	// * key: error-exit, message: X
-	if key == "box-name" { // since this is always the first key in a box listing, we use it to distinguish boxes
+	if key == "box-name" {
+		// since this is always the first key in a box listing, we use it to
+		// distinguish boxes
 		resp.Boxes = append(resp.Boxes, &Box{Name: strings.Join(message, "")})
 		resp.boxesIndex += 1
 	} else if key == "box-version" {

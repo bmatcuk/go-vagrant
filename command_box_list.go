@@ -7,10 +7,9 @@ type BoxListCommand struct {
 	BoxListResponse
 }
 
-// BoxList returns the available vagrant boxes. After setting
-// options as appropriate, you must call Run() or Start() followed by Wait()
-// to execute. Output will be in Boxes and any
-// error will be in Error.
+// BoxList returns the available vagrant boxes. After setting options as
+// appropriate, you must call Run() or Start() followed by Wait() to execute.
+// Output will be in Boxes and any error will be in Error.
 func (client *VagrantClient) BoxList() *BoxListCommand {
 	return &BoxListCommand{
 		BaseCommand:     newBaseCommand(client),
