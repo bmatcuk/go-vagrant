@@ -1,9 +1,11 @@
 package vagrant
 
-import "testing"
+import (
+	"testing"
+)
 
 func init() {
-	successfulOutput["box"] = `
+	successfulOutput["box list"] = `
 1630581222,,ui,info,andreiborisov/macos-bigsur-intel (parallels%!(VAGRANT_COMMA) 1.3.0)
 1630581222,,box-name,andreiborisov/macos-bigsur-intel
 1630581222,,box-provider,parallels
@@ -17,6 +19,7 @@ func init() {
 func TestBoxListCommand_Run(t *testing.T) {
 	client := newMockVagrantClient()
 	cmd := client.BoxList()
+	cmd.Env = newEnvTestOutputKey("box list")
 	if err := cmd.Run(); err != nil {
 		t.Fatalf("Command failed to run: %v", err)
 	}

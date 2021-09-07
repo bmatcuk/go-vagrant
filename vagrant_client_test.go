@@ -8,6 +8,8 @@ import (
 
 var successfulOutput = make(map[string]string)
 
+const EnvTestOutputKey = "GO_VAGRANT_TEST_OUTPUT_KEY"
+
 func newMockVagrantClient() *VagrantClient {
 	return &VagrantClient{
 		VagrantfileDir: ".",
@@ -25,6 +27,12 @@ func assertArguments(t *testing.T, args []string, expected ...string) {
 			t.Errorf("Expected arg %v to be '%v'; got %v", i, expected[i], arg)
 		}
 	}
+}
+
+// newEnvTestOutputKey creates an environment with a test output key,
+// used by the TestVagrantClient_Helper for output selection.
+func newEnvTestOutputKey(key string) []string {
+	return []string{fmt.Sprintf("%s=%s", EnvTestOutputKey, key)}
 }
 
 // This function is used during testing. It is called by the mock vagrant
@@ -46,7 +54,15 @@ func TestVagrantClient_Helper(t *testing.T) {
 	// If we got here, we were called as part of a test that executed an exec.Cmd
 	// object. We output some information about the arguments passed to us.
 	if len(args) > 0 {
-		output, ok := successfulOutput[args[0]]
+		var output string
+		var ok bool
+		// if custom test output key is set, use it to retrieve test output data
+		outputKey := os.Getenv(EnvTestOutputKey)
+		if outputKey != "" {
+			output, ok = successfulOutput[outputKey]
+		} else { // otherwise, use the subcommand name
+			output, ok = successfulOutput[args[0]]
+		}
 		if ok {
 			fmt.Print(output)
 		} else {
