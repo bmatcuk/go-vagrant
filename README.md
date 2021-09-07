@@ -82,6 +82,18 @@ func main() {
 
 ## Available Actions
 
+### BoxAdd
+Adds a box to your local vagrant box collection. Takes a location which is the 
+name, url, or path of the box
+
+```go
+func (*VagrantClient) BoxAdd(location string) *BoxAddCommand
+```
+
+Response:
+* **Error** - Set if an error occurred.
+
+
 ### BoxList
 Return a list of available vagrant boxes.
 

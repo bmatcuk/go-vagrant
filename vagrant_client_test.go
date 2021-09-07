@@ -18,6 +18,18 @@ func newMockVagrantClient() *VagrantClient {
 	}
 }
 
+func assertErr(t *testing.T, err error) {
+	if err == nil {
+		t.Fail()
+	}
+}
+
+func assertNoErr(t *testing.T, err error) {
+	if err != nil {
+		t.Fail()
+	}
+}
+
 func assertArguments(t *testing.T, args []string, expected ...string) {
 	if len(args) != len(expected) {
 		t.Fatalf("Expected %v args; got %v", len(expected), len(args))
