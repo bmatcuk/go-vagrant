@@ -15,7 +15,8 @@ type BoxAddCommand struct {
 	BaseCommand
 	ErrorResponse
 
-	// Clean any temporary download files. This will prevent resuming a previously started download.
+	// Clean any temporary download files. This will prevent resuming a
+	// previously started download.
 	Clean bool
 
 	// Overwrite an existing box if it exists
@@ -24,20 +25,22 @@ type BoxAddCommand struct {
 	// Name, url, or path of the box.
 	Location string
 
-	// Name of the box. Only has to be set if the box is provided as a path or url without metadata.
+	// Name of the box. Only has to be set if the box is provided as a path or
+	// url without metadata.
 	Name string
 
 	// Checksum for the box
 	Checksum string
 
-	// Type of the supplied Checksum. Allowed values are vagrant.MD5, vagrant.SHA1, vagrant.SHA256
+	// Type of the supplied Checksum. Allowed values are vagrant.MD5,
+	// vagrant.SHA1, vagrant.SHA256
 	CheckSumType CheckSumType
 }
 
-// BoxAdd adds a vagrant box to your local boxes.
-// Its parameter location is the name, url, or path of the box. After setting
-// options as appropriate, you must call Run() or Start() followed by Wait()
-// to execute. Errors will be recorded in Error.
+// BoxAdd adds a vagrant box to your local boxes.  Its parameter location is
+// the name, url, or path of the box. After setting options as appropriate, you
+// must call Run() or Start() followed by Wait() to execute. Errors will be
+// recorded in Error.
 func (client *VagrantClient) BoxAdd(location string) *BoxAddCommand {
 	return &BoxAddCommand{
 		Location:      location,

@@ -84,11 +84,21 @@ func main() {
 
 ### BoxAdd
 Adds a box to your local vagrant box collection. Takes a location which is the 
-name, url, or path of the box
+name, url, or path of the box.
 
 ```go
 func (*VagrantClient) BoxAdd(location string) *BoxAddCommand
 ```
+
+Options:
+* **Clean** (default: `false`) - Clean any temporary download files. This will
+  prevent resuming a previously started download.
+* **Force** (default: `false`) - Overwrite an existing box if it exists.
+* **Name** (default: `""`) - Name of the box. Only has to be set if the box is
+  provided as a path or url without metadata.
+* **Checksum** (default: `""`) - Checksum for the box.
+* **CheckSumType** - Type of the supplied Checksum. Allowed values are
+  vagrant.MD5, vagrant.SHA1, vagrant.SHA256.
 
 Response:
 * **Error** - Set if an error occurred.
